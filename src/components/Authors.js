@@ -1,38 +1,36 @@
-  
-import React from 'react'
+import React from "react";
+import "./Authors.css";
 
-const Authors = (props) => {
-  if (!props.show) {
-    return null
+const Authors = ({ result, show }) => {
+  console.log(result, "RESULT");
+  if (!show) {
+    return null;
   }
-  const authors = []
+  const authors = [];
 
   return (
     <div>
       <h2>authors</h2>
       <table>
         <tbody>
-          <tr>
-            <th></th>
-            <th>
-              born
-            </th>
-            <th>
-              books
-            </th>
+          <tr className="main-row">
+            <th>Author</th>
+            <th>born</th>
+            <th>books</th>
           </tr>
-          {authors.map(a =>
+          {result.data.allAuthors.map((a) => (
             <tr key={a.name}>
+              {/* <th>Author</th> */}
               <td>{a.name}</td>
+              {/* <th>born</th> */}
               <td>{a.born}</td>
               <td>{a.bookCount}</td>
             </tr>
-          )}
+          ))}
         </tbody>
       </table>
-
     </div>
-  )
-}
+  );
+};
 
-export default Authors
+export default Authors;
