@@ -1,34 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useQuery } from "@apollo/client";
+import { ALL_BOOKS } from "../queries";
 
-const Books = ({ show, resultBooks, display }) => {
-  console.log(resultBooks, "RESULTBOOKS");
-  console.log(display, "display");
-  if (!show) {
-    return null;
-  }
+const Books = ({ show }) => {
+  const [books, setBooks] = useState(null);
+  const result = useQuery(ALL_BOOKS);
+  console.log(result.data, "RESULT.DATA");
 
-  const books = [];
+  useEffect(() => {
+    if (result.data) {
+      setBooks(result.data.allBooks);
+    }
+  }, [result.data]);
 
   return (
     <div>
-      <h2>Books</h2>
-
-      <table>
-        <tbody>
-          <tr>
-            <th></th>
-            <th>author</th>
-            <th>published</th>
-          </tr>
-          {resultBooks.data.allBooks.map((a) => (
-            <tr key={a.title}>
-              <td>{a.title}</td>
-              <td>{a.author}</td>
-              <td>{a.published}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {show && (
+        <div>
+          <h2>Books</h2>
+          <table>
+            <tbody>
+              <tr>
+                <th></th>
+                <th>author</th>
+                <th>published</th>
+              </tr>
+              {books &&
+                books.map((a) => (
+                  <tr key={a.title}>
+                    <td>{a.title}</td>
+                    <td>{a.author}</td>
+                    <td>{a.published}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };

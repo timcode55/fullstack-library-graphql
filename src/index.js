@@ -6,8 +6,8 @@ import {
   ApolloClient,
   ApolloProvider,
   HttpLink,
-  InMemoryCache,
-  gql
+  InMemoryCache
+  // gql
 } from "@apollo/client";
 
 const client = new ApolloClient({
@@ -17,19 +17,19 @@ const client = new ApolloClient({
   })
 });
 
-const query = gql`
-  query {
-    allAuthors {
-      name
-      born
-      id
-    }
-  }
-`;
+// const query = gql`
+//   query {
+//     allAuthors {
+//       name
+//       born
+//       id
+//     }
+//   }
+// `;
 
-client.query({ query }).then((response) => {
-  console.log(response.data);
-});
+// client.query({ query }).then((response) => {
+//   console.log(response.data);
+// });
 
 ReactDOM.render(
   <ApolloProvider client={client}>
