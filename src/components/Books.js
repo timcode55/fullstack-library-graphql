@@ -9,6 +9,7 @@ const Books = ({ show }) => {
 
   useEffect(() => {
     if (result.data) {
+      console.log(result.data.allBooks, "result.data.allBooks");
       setBooks(result.data.allBooks);
     }
   }, [result.data]);
@@ -29,7 +30,7 @@ const Books = ({ show }) => {
                 books.map((a) => (
                   <tr key={a.title}>
                     <td>{a.title}</td>
-                    <td>{a.author}</td>
+                    <td>{a.author.name}</td>
                     <td>{a.published}</td>
                   </tr>
                 ))}
